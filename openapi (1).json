@@ -1,0 +1,123 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-in21.leadsquared.com/v2/ProspectActivity.svc/"
+    }
+  ],
+  "paths": {
+    "/Create": {
+      "post": {
+        "tags": [
+          "Create"
+        ],
+        "summary": "Sample endpoint: Post acitivity for a particular user",
+        "operationId": "addActivity",
+        "parameters": [
+          {
+            "name": "accessKey",
+            "in": "query",
+            "description": "ID of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "secretKey",
+            "in": "query",
+            "description": "ID of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "This is the status code for successful API call"
+          },
+          "400": {
+            "description": "The message body on the request is not as per API specification. Make sure that content type is set to “application/json” and the JSON body has correct attribute names and structure.",
+            "content": {}
+          },
+          "401": {
+            "description": "The API call was made with invalid access credentials. Check your AccessKey and SecretKey.",
+            "content": {}
+          },
+          "404": {
+            "description": "The API could not be found. Please check the API signature.",
+            "content": {}
+          },
+          "429": {
+            "description": "API calls exceeded the limit of 25 in 5 second(s).",
+            "content": {}
+          },
+          "500": {
+            "description": "The API called failed. There could be many reasons for it. Check the exception message to get more details.",
+            "content": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "order": {
+        "type": "object",
+        "properties": {
+          "RelatedProspectId": {
+            "type": "string",
+            "format": "char32"
+          },
+          "ActivityEvent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ActivityNote": {
+            "type": "string",
+            "format": "char32"
+          },
+          "ActivityDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "SchemaName": {
+                  "type": "string",
+                  "example": "mx_Custom_1"
+                },
+                "Value": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
