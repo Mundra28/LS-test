@@ -5,7 +5,7 @@
     "title": "Test API"
   },
   "host": "api-in21.leadsquared.com",
-  "basePath": "/v2/ProspectActivity.svc/",
+  "basePath": "/v2/",
   "schemes": [
     "https"
   ],
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/Create": {
+    "/ProspectActivity.svc/Create": {
       "post": {
         "summary": "Sample endpoint: Post acitivity for a particular user",
         "operationId": "addActivity",
@@ -28,13 +28,13 @@
             "name": "accessKey",
             "in": "query",
             "type": "string",
-            "description": "ID of the user",
+            "description": "Access key of the user",
             "required": true
           },
           {
             "name": "secretKey",
             "in": "query",
-            "description": "ID of the user",
+            "description": "secret key of the user",
             "required": true,
             "type": "string"
           },
