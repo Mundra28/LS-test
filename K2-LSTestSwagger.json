@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Test API"
+    "title": "K2-LS Test "
   },
   "host": "api-in21.leadsquared.com",
   "basePath": "/v2/",
@@ -74,7 +74,7 @@
     }
   },
   "definitions": {
-    "order": {
+    "CreateActivity": {
       "type": "object",
       "properties": {
         "RelatedProspectId": {
