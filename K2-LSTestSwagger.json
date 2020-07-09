@@ -43,7 +43,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/order"
+              "$ref": "#/definitions/CreateActivity"
             }
           }
         ],
