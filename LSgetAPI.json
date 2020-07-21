@@ -1,0 +1,105 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Testing"
+  },
+  "host": "api-in21.leadsquared.com",
+  "basePath": "/v2/LeadManagement.svc/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/RetrieveLeadByPhoneNumber": {
+      "get": {
+        "summary": "retrive lead ID",
+        "operationId": "loadData",
+        "tags": [
+          "phonenumber"
+        ],
+        "parameters": [
+          {
+            "name": "accessKey",
+            "in": "query",
+            "type": "string",
+            "description": "ID of the user",
+            "required": true
+          },
+          {
+            "name": "secretKey",
+            "in": "query",
+            "description": "ID of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "description": "ID of the user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is the status code for successful API call"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/LeadOwner.Get": {
+      "get": {
+        "tags": [
+          "LeadIdentifier"
+        ],
+        "parameters": [
+          {
+            "name": "accessKey",
+            "in": "query",
+            "type": "string",
+            "description": "access key of the user",
+            "required": true
+          },
+          {
+            "name": "secretKey",
+            "in": "query",
+            "description": "secret key of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "LeadIdentifier",
+            "in": "query",
+            "description": "Identifer to retrive lead details",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "description": "Value to passed",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is the status code for successful API call"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  }
+}
