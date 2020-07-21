@@ -1,0 +1,119 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Testing 
+host: api-in21.leadsquared.com
+basePath: /v2/LeadManagement.svc/
+schemes:
+  - https
+# consumes:
+#   - application/json
+# produces:
+#   - application/json
+paths:
+  /RetrieveLeadByPhoneNumber:
+    get:
+      summary: 'retrive lead ID'
+      operationId: loadData
+      tags:
+        - phonenumber
+      parameters:
+        - name: accessKey
+          in: query
+          type: string
+          description: ID of the user
+          required: true
+        - name: secretKey
+          in: query
+          description: ID of the user
+          required: true
+          type: string
+        - name: phone
+          in: query
+          description: ID of the user
+          required: true
+          type: string
+        # - name: body
+        #   in: body
+        #   required: true
+        #   schema:
+        #     $ref: '#/definitions/order'
+      responses:
+        '200':
+          description: This is the status code for successful API call
+        default:
+          description: Unexpected error
+  /LeadOwner.Get:
+    get:
+      tags: 
+        - LeadIdentifier
+      parameters:
+        - name: accessKey
+          in: query
+          type: string
+          description: access key of the user
+          required: true
+        - name: secretKey
+          in: query
+          description: secret key of the user
+          required: true
+          type: string
+        - name: LeadIdentifier
+          in: query
+          description: Identifer to retrive lead details
+          required: true
+          type: string
+        - name: value
+          in: query
+          description: Value to passed
+          required: true
+          type: string
+      responses: 
+        '200':
+          description: This is the status code for successful API call
+        default:
+          description: Unexpected error
+      
+# definitions:
+#   order:
+#     type: array
+#     items:
+#       type: object
+#       properties:
+#         Attribute:
+#           type: string
+#           format: char32
+#         Value:
+#           type: integer
+#           format: int32
+  #     ActivityNote:
+  #       type: string
+  #       format: char32
+  #     ActivityDateTime:
+  #       type: string
+  #       format: date-time
+  #       example: 'yyyy-mm-dd hh:mm:ss'
+  #     Fields:
+  #       $ref: '#/definitions/fields'
+  # res:
+  #   properties:
+  #     Status:
+  #       type: string
+  #     Message:
+  #       $ref: '#/definitions/message'
+  # fields:
+  #   type: array
+  #   items:
+  #     type: object
+  #     properties:
+  #       SchemaName:
+  #         type: string
+  #         example: mx_Custom_1
+  #       Value:
+  #         type: string
+  # message:
+  #   properties:
+  #     Id:
+  #       type: string
+  #     RelatedID:
+  #       type: string
