@@ -1,61 +1,100 @@
-openapi: 3.0.1
-info:
-  title: Test API
-  version: 1.0.0
-servers:
-- url: https://prod.finnov.in/oauth
-- url: https://banalysis.finnov.in/vehicle/
-paths:
-  /token:
-    post:
-      requestBody:
-        required: true
-        content:  
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                grant_type: 
-                  type: string
-                  example: password
-                client_id:
-                  type: string
-                client_secret:
-                  type: string
-                username:
-                  type: string
-                password:
-                  type: string
-      responses:
-        200:
-          description: OK
-          content: {}
-            
-  /getVehicleDetails/{VehicleNumber}:
-    get:
-      tags:
-      - load data
-      summary: Sample endpoint
-      description: get activity of Finnov
-      parameters:
-      - name: VehicleNumber
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        200:
-          description: OK
-          content:  # Response body
-            application/json: 
-              schema: 
-                type: object
-      security:
-      - Bearer: []
-      
-components:
-  securitySchemes:
-    Bearer:
-      type: apiKey
-      name: authorization
-      in: header
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Test API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://prod.finnov.in/oauth"
+    },
+    {
+      "url": "https://banalysis.finnov.in/vehicle/"
+    }
+  ],
+  "paths": {
+    "/token": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "grant_type": {
+                    "type": "string",
+                    "example": "password"
+                  },
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "client_secret": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/getVehicleDetails/{VehicleNumber}": {
+      "get": {
+        "tags": [
+          "load data"
+        ],
+        "summary": "Sample endpoint",
+        "description": "get activity of Finnov",
+        "parameters": [
+          {
+            "name": "VehicleNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "name": "authorization",
+        "in": "header"
+      }
+    }
+  }
+}
