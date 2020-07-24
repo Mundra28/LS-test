@@ -87,7 +87,7 @@
     "valuesphone": {
       "type": "object",
       "properties": {
-        "phonenumber": {
+        "phoneNumber": {
           "type": "number"
         }
       }
