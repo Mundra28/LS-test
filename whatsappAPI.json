@@ -69,10 +69,10 @@
           "type": "string"
         },
         "sms": {
-          "$ref": "#/definitions/values"
+          "$ref": "#/definitions/valuessms"
         },
         "whatsapp": {
-          "$ref": "#/definitions/values"
+          "$ref": "#/definitions/valueswhatsapp"
         }
       }
     },
@@ -89,7 +89,16 @@
         }
       }
     },
-    "values": {
+    "valuessms": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      }
+    }
+    
+     "valueswhatsapp": {
       "type": "object",
       "properties": {
         "text": {
