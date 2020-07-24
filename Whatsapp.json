@@ -80,12 +80,7 @@
       "type": "object",
       "properties": {
         "to": {
-          "type": "object",
-          "properties": {
-            "phoneNumber": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/valuephone"
         }
       }
     },
@@ -102,6 +97,15 @@
       "properties": {
         "text": {
           "type": "string"
+        }
+      }
+    }
+    
+    "valuephone": {
+      "type": "object",
+      "properties": {
+        "phonenumber": {
+          "type": "number"
         }
       }
     }
