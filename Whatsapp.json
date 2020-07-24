@@ -80,12 +80,15 @@
       "type": "object",
       "properties": {
         "to": {
-          "type": "object",
-          "properties": {
-            "phoneNumber": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/valuesphone"
+        }
+      }
+    },
+    "valuesphone": {
+      "type": "object",
+      "properties": {
+        "phonenumber": {
+          "type": "number"
         }
       }
     },
