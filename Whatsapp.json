@@ -7,8 +7,7 @@
   "host": "pwpynv.api.infobip.com",
   "basePath": "/omni/1",
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
