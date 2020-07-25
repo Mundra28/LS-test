@@ -68,10 +68,7 @@
         "scenarioKey": {
           "type": "string"
         },
-        "sms": {
-          "$ref": "#/definitions/valuessms"
-        },
-        "whatsapp": {
+        "whatsApp": {
           "$ref": "#/definitions/valuewhatsapp"
         }
       }
@@ -88,14 +85,6 @@
       "type": "object",
       "properties": {
         "phoneNumber": {
-          "type": "number"
-        }
-      }
-    },
-    "valuessms": {
-      "type": "object",
-      "properties": {
-        "text": {
           "type": "string"
         }
       }
