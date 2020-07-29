@@ -1,0 +1,176 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: 'K2-LS Test '
+host: api-in21.leadsquared.com
+basePath: /v2/
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /ProspectActivity.svc/Create:
+    post:
+      summary: Post acitivity on a particular Lead
+      operationId: addActivity
+      tags:
+        - LeadSquared APIs
+      parameters:
+        - name: accessKey
+          in: query
+          type: string
+          description: Access key of the user
+          required: true
+        - name: secretKey
+          in: query
+          description: secret key of the user
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateActivity'
+      responses:
+        '200':
+          description: This is the status code for successful API call
+        default:
+          description: Unexpected error
+  /LeadManagement.svc/Lead.Update:
+    post:
+      summary: Update lead fields
+      operationId: updateLeadField
+      tags:
+        - LeadSquared APIs
+      parameters:
+        - name: accessKey
+          in: query
+          type: string
+          description: Access ID of the user
+          required: true
+        - name: secretKey
+          in: query
+          description: secret key of the user
+          required: true
+          type: string
+        - name: leadId
+          in: query
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/leadAttr'
+      responses:
+        '200':
+          description: This is the status code for successful API call
+        default:
+          description: Unexpected error
+  /LeadManagement.svc/Leads.GetById:
+    get:
+      summary: Retrive lead details from LS DI
+      operationId: retriveLeadDetails
+      tags:
+        - LeadSquared APIs
+      parameters:
+        - name: accessKey
+          in: query
+          type: string
+          description: Access ID of the user
+          required: true
+        - name: secretKey
+          in: query
+          description: secret key of the user
+          required: true
+          type: string
+        - name: id
+          in: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: This is the status code for successful API call
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/leadDetail'
+        default:
+          description: Unexpected error
+  /LeadManagement.svc/RetrieveLeadByPhoneNumber:
+    get:
+      summary: Retrive lead details from LS DI using phone
+      operationId: retriveLeadDetailUsingPhone
+      tags:
+        - LeadSquared APIs
+      parameters:
+        - name: accessKey
+          in: query
+          type: string
+          description: Access ID of the user
+          required: true
+        - name: secretKey
+          in: query
+          description: secret key of the user
+          required: true
+          type: string
+        - name: phone
+          in: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: This is the status code for successful API call
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/leadDetail'
+        default:
+          description: Unexpected error
+definitions:
+  CreateActivity:
+    type: object
+    properties:
+      RelatedProspectId:
+        type: string
+      ActivityEvent:
+        type: integer
+      ActivityNote:
+        type: string
+      ActivityDateTime:
+        type: string
+        example: 'yyyy-mm-dd hh:mm:ss'
+      Fields:
+        type: array
+        items:
+          $ref: '#/definitions/fields'
+  fields:
+    type: object
+    properties:
+      SchemaName:
+        type: string
+        example: mx_Custom_1
+      Value:
+        type: string
+  leadAttr:
+    type: object
+    properties:
+      Attribute:
+        type: string
+      Value:
+        type: integer
+  leadDetail:
+    type: object
+    properties:
+      mx_FCG_Dealer_ID:
+        type: string
+      mx_Name_on_Cancelled_Cheque:
+        type: string
+      mx_IFSC_code_on_Cancelled_Cheque:
+        type: string
+      mx_Account_Number_on_Cancelled_Cheque:
+        type: number
