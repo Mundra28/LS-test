@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Testing learn"
+  },
+  "host": "banalysis.finnov.in",
+  "basePath": "/vehicle/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/getVehicleDetails/{VehicleNumber}": {
+      "get": {
+        "tags": [
+          "load data"
+        ],
+        "summary": "Sample endpoint",
+        "description": "get activity of Finnov",
+        "parameters": [
+          {
+            "name": "VehicleNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "required": true,
+            "in": "header",
+            "description": "Bearer {{Token}}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is the status code for successful API call",
+            "schema": {
+              "$ref": "#/definitions/res"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "res": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "number"
+        },
+        "registeringAuthority": {
+          "type": "string"
+        },
+        "registrationNo": {
+          "type": "string"
+        },
+        "registrationDate": {
+          "type": "string"
+        },
+        "chassisNo": {
+          "type": "string"
+        },
+        "engineNo": {
+          "type": "string"
+        },
+        "ownerName": {
+          "type": "string"
+        },
+        "vehicleClass": {
+          "type": "string"
+        },
+        "fuel": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "fitnessUpto": {
+          "type": "string"
+        },
+        "taxUpto": {
+          "type": "string"
+        },
+        "pucNo": {
+          "type": "string"
+        },
+        "emission": {
+          "type": "string"
+        },
+        "rcStatus": {
+          "type": "string"
+        },
+        "nocDetails": {
+          "type": "string"
+        },
+        "financierName": {
+          "type": "string"
+        },
+        "financed": {
+          "type": "string"
+        },
+        "blackListStatus": {
+          "type": "string"
+        },
+        "permit": {
+          "type": "string"
+        },
+        "insuranceDetails": {
+          "$ref": "#/definitions/insurance"
+        }
+      }
+    },
+    "insurance": {
+      "type": "object",
+      "properties": {
+        "insuranceName": {
+          "type": "string"
+        },
+        "policyNo": {
+          "type": "string"
+        },
+        "validUpto": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
