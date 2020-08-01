@@ -124,26 +124,10 @@
       "type": "object",
       "properties": {
         "mx_Custom_22": {
-          "$ref": "#/definitions/cheque"
+          "type" : "string"
         }
       }
     },
-    "cheque": {
-      "type": "object",
-      "properties": {
-        "mx_CustomObject_1": {
-          "type": "string"
-        },
-        "ModifiedByName": {
-          "type": "string"
-        },
-        "ModifiedOn": {
-          "type": "string"
-        },
-        "Status": {
-          "type": "string"
-        }
-      }
     }
   }
 }
