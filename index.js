@@ -21,9 +21,9 @@
             "displayName": "order",
             "description": "order",
             "properties": {
-              "Parameter": {
-                "displayName": "Parameter",
-                "type": "String",
+              "code": {
+                "displayName": "code",
+                "type": "number",
                 "description": "Parameter Value"
               },
               "result": {
@@ -36,8 +36,8 @@
               "addActivity": {
                 "displayName": "addActivity",
                 "type": "create",
-                "inputs": ["Parameter"],
-                "requiredInputs": ["Parameter"],
+                "inputs": ["code"],
+                "requiredInputs": ["code"],
                 "parameters": {
                   "accessKey": {
                     "displayName": "accessKey",
@@ -101,10 +101,10 @@
       return new Promise((resolve, reject) => {
         let urlValue = configuration["ServiceURL"];
         let httpPath = `/ProspectActivity.svc/Retrieve`;
-        let Parameter = properties["Parameter"];
+        let code = properties["code"];
         let data = {
           "Parameter": {
-            "ActivityEvent": Parameter
+            "ActivityEvent": code
           }
         };
         let xhr = new XMLHttpRequest();
