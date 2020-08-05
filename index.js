@@ -1,2 +1,129 @@
-metadata={systemName:"jssp.whatsapp",displayName:"Whatsapp JSSP",description:"A K2 JSSP Broker to send Whatsapp Messages",configuration:{ServiceURL:{displayName:"Service URL",type:"string",value:"https://pwpynv.api.infobip.com/omni/1"}}},ondescribe=async function({configuration:e}){postSchema({objects:{message:{displayName:"message",description:"message",properties:{phonenr:{displayName:"PhoneNr",type:"string",description:"The Destination Phone nr"},scenarioKey:{displayName:"scenarioKey",type:"string",description:"scenarioKey Value"},text:{displayName:"Text",type:"string",description:"What to send"},result:{displayName:"Result",type:"string",description:"Result of call"}},methods:{sendMessage:{displayName:"sendMessage",type:"execute",inputs:["phonenr","scenarioKey","text"],requiredInputs:["phonenr","scenarioKey","text"],requiredParameters:["phonenr","scenarioKey","text"],outputs:["result"],data:{httpMethod:"POST",httpPath:"/advanced"}}}}}})},onexecute=async function({objectName:e,methodName:t,parameters:s,properties:a,configuration:n}){switch(e){case"message":await async function(e,t,s,a){switch(e){case"sendMessage":await function(e,t,s){return new Promise((e,a)=>{let n=s.ServiceURL,r="/advanced",i={destinations:[{to:{phoneNumber:t.phonenr}}],scenarioKey:t.scenarioKey,whatsApp:{text:t.text}},o=new XMLHttpRequest;o.onreadystatechange=function(){try{if(4!==o.readyState)return;if(200!==o.status&&201!==o.status)throw new Error("Failed with status "+o.status);JSON.parse(o.responseText),postResult({result:o.responseText}),e()}catch(e){console.log("ERROR: "+e),a(e)}},n=n.endsWith("/")?n:n+"/",r=r.startsWith("/")?r.substr(1):r+"/",o.withCredentials=!0,o.open("POST",n+r),o.setRequestHeader("Content-Type","application/json"),o.send(JSON.stringify(i))})}(0,s,a);break;default:throw new Error("The method "+e+" is not supported.")}}(t,0,a,n);break;default:throw new Error("The object "+e+" is not supported.")}};
+(function () {
+    metadata = {
+      "systemName": "jssp.LS",
+      "displayName": "LS jssp ",
+      "description": "A K2 JSSP Broker",
+      "configuration": {
+        "ServiceURL": {
+          "displayName": "Service URL",
+          "type": "string",
+          "value": "https://api-in21.leadsquared.com"
+        }
+      }
+    };
+
+    ondescribe = async function ({
+      configuration
+    }) {
+      postSchema({
+        "objects": {
+          "order": {
+            "displayName": "order",
+            "description": "order",
+            "properties": {
+              "Parameter": {
+                "displayName": "Parameter",
+                "type": "String",
+                "description": "Parameter Value"
+              }
+            },
+            "methods": {
+              "addActivity": {
+                "displayName": "addActivity",
+                "type": "create",
+                "inputs": ["Parameter"],
+                "requiredInputs": ["Parameter"],
+                "parameters": {
+                  "accessKey": {
+                    "displayName": "accessKey",
+                    "type": "string"
+                  },
+                  "secretKey": {
+                    "displayName": "secretKey",
+                    "type": "string"
+                  },
+                  "leadId": {
+                    "displayName": "leadId",
+                    "type": "string"
+                  },
+                  "getFileUrl": {
+                    "displayName": "getFileUrl",
+                    "type": "string"
+                  }
+                },
+                "requiredParameters": ["accessKey", "secretKey", "leadId", "getFileUrl"],
+                "outputs": ["RecordCount", "ProspectActivities"],
+                "data": {
+                  "httpMethod": "post",
+                  "httpPath": "/ProspectActivity.svc/Retrieve"
+                }
+              }
+            }
+          }
+        }
+      });
+    };
+
+    onexecute = async function ({
+      objectName,
+      methodName,
+      parameters,
+      properties,
+      configuration
+    }) {
+      switch (objectName) {
+        case "order":
+          await onexecuteorder(methodName, parameters, properties, configuration);
+          break;
+
+        default:
+          throw new Error("The object " + objectName + " is not supported.");
+      }
+    };
+
+    async function onexecuteorder(methodName, parameters, properties, configuration) {
+      switch (methodName) {
+        case "addActivity":
+          await onexecuteorderaddActivity(parameters, properties, configuration);
+          break;
+
+        default:
+          throw new Error("The method " + methodName + " is not supported.");
+      }
+    }
+
+    function onexecuteorderaddActivity(parameters, properties, configuration) {
+      return new Promise((resolve, reject) => {
+        let urlValue = configuration["ServiceURL"];
+        let httpPath = `/ProspectActivity.svc/Retrieve`;
+        let Parameter = properties["Parameter"];
+        let data = {
+          "Parameter": {
+            "ActivityEvent": Parameter
+          }
+        };
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+          try {
+            if (xhr.readyState !== 4) return;
+            if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
+            let obj = JSON.parse(xhr.responseText);
+            postResult(executeResult);
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+        };
+
+        urlValue = urlValue.endsWith("/") ? urlValue : urlValue + "/";
+        httpPath = httpPath.startsWith("/") ? httpPath.substr(1) : httpPath + "/";
+        xhr.withCredentials = true;
+        xhr.open("post", urlValue + httpPath);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(data);
+      });
+    }
+
+}());
 //# sourceMappingURL=index.js.map
