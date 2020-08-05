@@ -126,7 +126,7 @@
         xhr.withCredentials = true;
         xhr.open("post", urlValue + httpPath);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       });
     }
 
