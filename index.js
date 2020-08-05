@@ -25,13 +25,12 @@
                 "displayName": "Parameter",
                 "type": "String",
                 "description": "Parameter Value"
+              },
+              "result": {
+                "displayName": "result",
+                "type": "string",
+                "description": "Result of call"
               }
-
-               "result": {
-                        "displayName": "Result",
-                        "type": "string",
-                        "description": "Result of call"
-                    }
             },
             "methods": {
               "addActivity": {
