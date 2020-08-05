@@ -26,6 +26,12 @@
                 "type": "String",
                 "description": "Parameter Value"
               }
+
+               "result": {
+                        "displayName": "Result",
+                        "type": "string",
+                        "description": "Result of call"
+                    }
             },
             "methods": {
               "addActivity": {
@@ -52,7 +58,7 @@
                   }
                 },
                 "requiredParameters": ["accessKey", "secretKey", "leadId", "getFileUrl"],
-                "outputs": ["RecordCount", "ProspectActivities"],
+                "outputs": ["result"],
                 "data": {
                   "httpMethod": "post",
                   "httpPath": "/ProspectActivity.svc/Retrieve"
