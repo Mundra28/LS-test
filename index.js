@@ -100,7 +100,7 @@
     function onexecuteorderaddActivity(parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
         let urlValue = configuration["ServiceURL"];
-        let httpPath = `/ProspectActivity.svc/Retrieve`;
+        let httpPath = `/ProspectActivity.svc/Retrieve?accessKey=${parameters["accessKey"]}&secretKey=${parameters["secretKey"]}&leadId=${parameters["leadId"]}&getFileUrl=true`;
         let code = properties["code"];
         let data = {
           "Parameter": {
@@ -123,7 +123,6 @@
 
         urlValue = urlValue.endsWith("/") ? urlValue : urlValue + "/";
         httpPath = httpPath.startsWith("/") ? httpPath.substr(1) : httpPath + "/";
-        xhr.withCredentials = true;
         xhr.open("post", urlValue + httpPath);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(data));
