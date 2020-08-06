@@ -1,0 +1,144 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Testing learn"
+  },
+  "host": "api-in21.leadsquared.com",
+  "basePath": "/v2/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/LeadManagement.svc/Leads.Get": {
+      "post": {
+        "summary": "Sample endpoint: Post acitivity for a particular user",
+        "operationId": "addActivity",
+        "tags": [
+          "hash"
+        ],
+        "parameters": [
+          {
+            "name": "accessKey",
+            "in": "query",
+            "type": "string",
+            "description": "ID of the user",
+            "required": true
+          },
+          {
+            "name": "secretKey",
+            "in": "query",
+            "description": "ID of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is the status code for successful API call",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/res"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "order": {
+      "type": "object",
+      "properties": {
+        "Parameter": {
+          "$ref": "#/definitions/para"
+        },
+        "Columns": {
+          "$ref": "#/definitions/col"
+        },
+        "Sorting": {
+          "$ref": "#/definitions/sort"
+        },
+        "Paging": {
+          "$ref": "#/definitions/Page"
+        }
+      }
+    },
+    "para": {
+      "type": "object",
+      "properties": {
+        "LookupName": {
+          "type": "string"
+        },
+        "LookupValue": {
+          "type": "string"
+        },
+        "SqlOperator": {
+          "type": "string"
+        }
+      }
+    },
+    "col": {
+      "type": "object",
+      "properties": {
+        "Include_CSV": {
+          "type": "string"
+        }
+      }
+    },
+    "sort": {
+      "type": "object",
+      "properties": {
+        "ColumnName": {
+          "type": "string"
+        },
+        "Direction": {
+          "type": "string"
+        }
+      }
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "PageIndex": {
+          "type": "integer"
+        },
+        "PageSize": {
+          "type": "integer"
+        }
+      }
+    },
+    "res": {
+      "type": "object",
+      "properties": {
+        "ProspectID": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Phone": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
