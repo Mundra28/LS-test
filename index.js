@@ -100,7 +100,7 @@
     function onexecuteorderaddActivity(parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
         let urlValue = configuration["ServiceURL"];
-        let httpPath = `/ProspectActivity.svc/Retrieve?accessKey=${parameters["accessKey"]}&secretKey=${parameters["secretKey"]}&leadId=${parameters["leadId"]}&getFileUrl=true`;
+        let httpPath = `/ProspectActivity.svc/Retrieve?accessKey=paameters["accessKey"]}&secretKey=parameters["secretKey"]&leadId=parameters["leadId"]&getFileUrl=parameters["getFileUrl"]`;
         let code = properties["code"];
         let data = {
           "Parameter": {
