@@ -30,6 +30,18 @@
                 "displayName": "result",
                 "type": "extendedString",
                 "description": "Result of call"
+              },
+                
+                 "result1": {
+                "displayName": "result1",
+                "type": "extendedString",
+                "description": "Result of call"
+              },
+                
+                 "result2": {
+                "displayName": "result2",
+                "type": "extendedString",
+                "description": "Result of call"
               }
             },
             "methods": {
@@ -57,7 +69,7 @@
                   }
                 },
                 "requiredParameters": ["accessKey", "secretKey", "leadId", "getFileUrl"],
-                "outputs": ["result"]
+                "outputs": ["result", "result1", "result2"]
               }
             }
           }
@@ -111,10 +123,13 @@
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
             let obj = JSON.parse(xhr.responseText);
             let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_22);
-//             let mxCustom23Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_23);
-//             let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
+            let mxCustom23Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_23);
+            let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
             postResult({
-              "result": mxCustom22Obj.mx_CustomObject_1
+              "result": mxCustom22Obj.mx_CustomObject_1,
+              "result": mxCustom23Obj.mx_CustomObject_1,
+              "result": mxCustom28Obj.mx_CustomObject_1
+                
 //             }, {
 //               "result": mxCustom23Obj.mx_CustomObject_1
 //             }, {
