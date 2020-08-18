@@ -114,7 +114,7 @@
         let urlValue = configuration["ServiceURL"];
         let httpPath = `/v2/ProspectActivity.svc/Retrieve?accessKey=${parameters["accessKey"]}&secretKey=${parameters["secretKey"]}&leadId=${parameters["leadId"]}&getFileUrl=${parameters["getFileUrl"]}`;
         let ActivityCode = properties["ActivityCode"];
-        var temp = ${parameters["fieldName"]};
+        var temp = parameters["fieldName"];
         let data = {
           "Parameter": {
             "ActivityEvent": ActivityCode
