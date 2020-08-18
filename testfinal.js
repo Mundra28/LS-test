@@ -60,7 +60,7 @@
               "retrieveFileUrl": {
                 "displayName": "retrieveFileUrl",
                 "type": "create",
-                "inputs": ["ActivityCode", "fieldName],
+                "inputs": ["ActivityCode", "fieldName"],
                 "requiredInputs": ["ActivityCode", "fieldName"],
                 "parameters": {
                   "accessKey": {
