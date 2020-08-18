@@ -67,7 +67,6 @@
                     "displayName": "getFileUrl",
                     "type": "string"
                   },
-
                   "fieldName": {
                     "displayName": "fieldName",
                     "type": "string"
@@ -115,7 +114,7 @@
         let urlValue = configuration["ServiceURL"];
         let httpPath = `/v2/ProspectActivity.svc/Retrieve?accessKey=${parameters["accessKey"]}&secretKey=${parameters["secretKey"]}&leadId=${parameters["leadId"]}&getFileUrl=${parameters["getFileUrl"]}`;
         let ActivityCode = properties["ActivityCode"];
-        var temp = parameters["fieldName"];
+        var temp = ${parameters["fieldName"]};
         let data = {
           "Parameter": {
             "ActivityEvent": ActivityCode
@@ -128,7 +127,7 @@
             if (xhr.readyState !== 4) return;
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
             let obj = JSON.parse(xhr.responseText);
-            let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.${parameters["fieldName"]});
+            let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.temp);
             let mxCustom23Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_23);
             let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
             postResult({
