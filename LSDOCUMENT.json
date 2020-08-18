@@ -117,7 +117,7 @@
               "resultProprietor": mxCustom22Obj.mx_CustomObject_1,
               "resultCompany": mxCustom23Obj.mx_CustomObject_1,
               "resultPartnership": mxCustom28Obj.mx_CustomObject_1
-            },
+            }
             );
             resolve();
           } catch (error) {
