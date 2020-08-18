@@ -27,7 +27,6 @@
                 "description": "Parameter Value"
               },
 
-              {
               "fieldName": {
                 "displayName": "fieldName",
                 "type": "string",
