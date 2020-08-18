@@ -127,8 +127,8 @@
             let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
             postResult({
               "result": mxCustom22Obj.mx_CustomObject_1,
-              "result": mxCustom23Obj.mx_CustomObject_1,
-              "result": mxCustom28Obj.mx_CustomObject_1
+              "result1": mxCustom23Obj.mx_CustomObject_1,
+              "result2": mxCustom28Obj.mx_CustomObject_1
                 
 //             }, {
 //               "result": mxCustom23Obj.mx_CustomObject_1
