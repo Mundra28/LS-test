@@ -75,7 +75,7 @@
                   }
                 },
                 "requiredParameters": ["accessKey", "secretKey", "leadId", "getFileUrl"],
-                "outputs": ["result", "result1", "result2"]
+                "outputs": ["result", "result1", "result2","temp"]
               }
             }
           }
@@ -132,6 +132,7 @@
             let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_22);
             let mxCustom23Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_23);
             let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
+            let temp = properties["fieldName];
             postResult({
               "result": mxCustom22Obj.mx_CustomObject_1,
               "result1": mxCustom23Obj.mx_CustomObject_1,
