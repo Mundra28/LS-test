@@ -43,12 +43,6 @@
                 "displayName": "result2",
                 "type": "extendedString",
                 "description": "Result of call"
-              },
-                
-                 "temp": {
-                "displayName": "temp",
-                "type": "String",
-                "description": "Result of call"
               }
             },
             "methods": {
@@ -73,10 +67,15 @@
                   "getFileUrl": {
                     "displayName": "getFileUrl",
                     "type": "string"
+                  },
+                  "temp": {
+                    "displayName": "temp",
+                    "type": "string"
                   }
+
                 },
-                "requiredParameters": ["accessKey", "secretKey", "leadId", "getFileUrl"],
-                "outputs": ["result", "result1", "result2","temp"]
+                "requiredParameters": ["accessKey", "secretKey", "leadId", "getFileUrl","temp"],
+                "outputs": ["result", "result1", "result2"]
               }
             }
           }
@@ -117,7 +116,6 @@
         let urlValue = configuration["ServiceURL"];
         let httpPath = `/v2/ProspectActivity.svc/Retrieve?accessKey=${parameters["accessKey"]}&secretKey=${parameters["secretKey"]}&leadId=${parameters["leadId"]}&getFileUrl=${parameters["getFileUrl"]}`;
         let ActivityCode = properties["ActivityCode"];
-        // var temp = properties["fieldName"];
         let data = {
           "Parameter": {
             "ActivityEvent": ActivityCode
@@ -125,15 +123,14 @@
         };
         let xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function (properties) {
+        xhr.onreadystatechange = function (parameters) {
           try {
             if (xhr.readyState !== 4) return;
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
             let obj = JSON.parse(xhr.responseText);
-            let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_22);
+            let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.parameters["temp"]);
             let mxCustom23Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_23);
             let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
-            let temp = "testing";
             postResult({
               "result": mxCustom22Obj.mx_CustomObject_1,
               "result1": mxCustom23Obj.mx_CustomObject_1,
@@ -161,4 +158,3 @@
 
 }());
 //# sourceMappingURL=index.js.map
-
