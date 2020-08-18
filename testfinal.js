@@ -1,7 +1,7 @@
 (function () {
     metadata = {
-      "systemName": "jssp.LS.KKB",
-      "displayName": "LS jssp KKB",
+      "systemName": "LeadSquaredDocumentUrl.jssp",
+      "displayName": "LeadSquaredDocumentUrlJssp",
       "description": "A K2 JSSP Broker for leadsquared",
       "configuration": {
         "ServiceURL": {
@@ -113,13 +113,13 @@
             let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_22);
             let mxCustom23Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_23);
             let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
-            postResult([{
+            postResult({
               "result": mxCustom22Obj.mx_CustomObject_1
-            }, {
-              "result": mxCustom23Obj.mx_CustomObject_1
-            }, {
-              "result": mxCustom1Obj.mx_CustomObject_1
-            }]);
+//             }, {
+//               "result": mxCustom23Obj.mx_CustomObject_1
+//             }, {
+//               "result": mxCustom1Obj.mx_CustomObject_1
+            });
             resolve();
           } catch (error) {
             reject(error);
