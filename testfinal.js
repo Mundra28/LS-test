@@ -133,13 +133,12 @@
             let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_22);
             let mxCustom23Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_23);
             let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
-            let posti = "testing";
+            let temp = "testing";
             postResult({
               "result": mxCustom22Obj.mx_CustomObject_1,
               "result1": mxCustom23Obj.mx_CustomObject_1,
-              "result2": mxCustom28Obj.mx_CustomObject_1,
-               
-                
+              "result2": mxCustom28Obj.mx_CustomObject_1
+              
 //             }, {
 //               "result": mxCustom23Obj.mx_CustomObject_1
 //             }, {
