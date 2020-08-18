@@ -138,7 +138,6 @@
               "result": mxCustom22Obj.mx_CustomObject_1,
               "result1": mxCustom23Obj.mx_CustomObject_1,
               "result2": mxCustom28Obj.mx_CustomObject_1,
-               "temp" : posti
                
                 
 //             }, {
