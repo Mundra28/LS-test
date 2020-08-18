@@ -124,7 +124,7 @@
         };
         let xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function (properties) {
           try {
             if (xhr.readyState !== 4) return;
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
