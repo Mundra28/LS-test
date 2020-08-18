@@ -27,11 +27,6 @@
                 "description": "Parameter Value"
               },
 
-              "fieldName": {
-                "displayName": "fieldName",
-                "type": "string",
-                "description": "responseValue"
-              },
               "result": {
                 "displayName": "result",
                 "type": "extendedString",
@@ -60,8 +55,8 @@
               "retrieveFileUrl": {
                 "displayName": "retrieveFileUrl",
                 "type": "create",
-                "inputs": ["ActivityCode", "fieldName"],
-                "requiredInputs": ["ActivityCode", "fieldName"],
+                "inputs": ["ActivityCode"],
+                "requiredInputs": ["ActivityCode"],
                 "parameters": {
                   "accessKey": {
                     "displayName": "AccessKey",
@@ -138,11 +133,13 @@
             let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_22);
             let mxCustom23Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_23);
             let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
-            let temp = properties["fieldName"];
+            let temp = "testing";
             postResult({
               "result": mxCustom22Obj.mx_CustomObject_1,
               "result1": mxCustom23Obj.mx_CustomObject_1,
-              "result2": mxCustom28Obj.mx_CustomObject_1
+              "result2": mxCustom28Obj.mx_CustomObject_1,
+               "temp" = "testing"
+               
                 
 //             }, {
 //               "result": mxCustom23Obj.mx_CustomObject_1
