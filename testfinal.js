@@ -48,14 +48,20 @@
                 "displayName": "result2",
                 "type": "extendedString",
                 "description": "Result of call"
+              },
+                
+                 "temp": {
+                "displayName": "temp",
+                "type": "String",
+                "description": "Result of call"
               }
             },
             "methods": {
               "retrieveFileUrl": {
                 "displayName": "retrieveFileUrl",
                 "type": "create",
-                "inputs": ["ActivityCode"],
-                "requiredInputs": ["ActivityCode"],
+                "inputs": ["ActivityCode", "fieldName],
+                "requiredInputs": ["ActivityCode", "fieldName"],
                 "parameters": {
                   "accessKey": {
                     "displayName": "AccessKey",
