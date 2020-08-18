@@ -27,11 +27,11 @@
                 "description": "Parameter Value"
               },
 
-              // "fieldName": {
-              //   "displayName": "fieldName",
-              //   "type": "string",
-              //   "description": "responseValue"
-              // },
+              "fieldName": {
+                "displayName": "fieldName",
+                "type": "string",
+                "description": "responseValue"
+              },
               "result": {
                 "displayName": "result",
                 "type": "extendedString",
