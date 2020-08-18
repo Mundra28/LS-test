@@ -110,7 +110,7 @@
             if (xhr.readyState !== 4) return;
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
             let obj = JSON.parse(xhr.responseText);
-            let mxCustom1Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_1);
+            let mxCustom22Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_22);
 //             let mxCustom23Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_23);
 //             let mxCustom28Obj = JSON.parse(obj.ProspectActivities[0].ActivityFields.mx_Custom_28);
             postResult({
