@@ -1,4 +1,5 @@
 (function () {
+    var imageField;
     metadata = {
       "systemName": "LeadSquaredDocumentUrl.jssp",
       "displayName": "LeadSquaredDocumentUrlJssp",
@@ -109,13 +110,13 @@
         };
         let xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function (parameters) {
+        xhr.onreadystatechange = function () {
           try {
             if (xhr.readyState !== 4) return;
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
             let obj = JSON.parse(xhr.responseText);
-            let imageField = parameters["fieldName"];
-            let mxCustomObj = JSON.parse(obj.ProspectActivities[0].ActivityFields.parameters["fieldName"]);
+            imageField = parameters["fieldName"];
+            let mxCustomObj = JSON.parse(obj.ProspectActivities[0].ActivityFields[imageField]);
             postResult({
               "result": mxCustomObj.mx_CustomObject_1
             });
