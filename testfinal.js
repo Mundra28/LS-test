@@ -115,7 +115,7 @@
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
             let obj = JSON.parse(xhr.responseText);
             let imageField = parameters["fieldName"];
-            let mxCustomObj = JSON.parse(obj.ProspectActivities[0].ActivityFields[imageField]);
+            let mxCustomObj = JSON.parse(obj.ProspectActivities[0].ActivityFields.parameters["fieldName"]);
             postResult({
               "result": mxCustomObj.mx_CustomObject_1
             });
