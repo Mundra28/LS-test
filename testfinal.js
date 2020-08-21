@@ -123,7 +123,7 @@
           "scenarioKey": scenarioKey,
           "whatsApp": {
             "templateName": template,
-            "templateData": [mak, modl, registraion],
+            "templateData": ["mak", "modl", "registraion"],
             "language": "en"
           }
         };
