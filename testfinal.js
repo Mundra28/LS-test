@@ -1,14 +1,13 @@
 (function () {
-    var imageField;
     metadata = {
-      "systemName": "LeadSquaredDocumentUrl.jssp",
-      "displayName": "LeadSquaredDocumentUrlJssp",
-      "description": "A K2 JSSP Broker for leadsquared",
+      "systemName": "jssp.whatsapp",
+      "displayName": "Whatsapp JSSP",
+      "description": "A K2 JSSP Broker to send Whatsapp Messages",
       "configuration": {
         "ServiceURL": {
           "displayName": "Service URL",
           "type": "string",
-          "value": "https://api-in21.leadsquared.com"
+          "value": "https://pwpynv.api.infobip.com/omni/1"
         }
       }
     };
@@ -17,52 +16,59 @@
       configuration
     }) {
       postSchema({
-        "objects": {
-          "body": {
-            "displayName": "body",
-            "description": "payload",
-            "properties": {
-              "ActivityCode": {
-                "displayName": "ActivityCode",
-                "type": "number",
-                "description": "Parameter Value"
+        objects: {
+          message: {
+            displayName: "message",
+            description: "message",
+            properties: {
+              phonenr: {
+                displayName: "PhoneNr",
+                type: "string",
+                description: "The Destination Phone nr"
               },
-              "result": {
-                "displayName": "result",
-                "type": "extendedString",
-                "description": "Result of call"
+              scenarioKey: {
+                displayName: "scenarioKey",
+                type: "string",
+                description: "scenarioKey Value"
+              },
+              templateName: {
+                displayName: "templateName",
+                type: "string",
+                description: "template Name"
+              },
+              make: {
+                displayName: "make",
+                type: "string",
+                description: "make of the car"
+              },
+              model: {
+                displayName: "model",
+                type: "string",
+                description: "Model of car"
+              },
+              regNo: {
+                displayName: "regNo",
+                type: "string",
+                description: "Reg no of the car"
+              },
+              result: {
+                displayName: "Result",
+                type: "string",
+                description: "Result of call"
               }
             },
-            "methods": {
-              "retrieveFileUrl": {
-                "displayName": "retrieveFileUrl",
-                "type": "create",
-                "inputs": ["ActivityCode"],
-                "requiredInputs": ["ActivityCode"],
-                "parameters": {
-                  "accessKey": {
-                    "displayName": "accessKey",
-                    "type": "string"
-                  },
-                  "secretKey": {
-                    "displayName": "secretKey",
-                    "type": "string"
-                  },
-                  "leadId": {
-                    "displayName": "leadId",
-                    "type": "string"
-                  },
-                  "getFileUrl": {
-                    "displayName": "getFileUrl",
-                    "type": "string"
-                  },
-                  "fieldName": {
-                    "displayName": "fieldName",
-                    "type": "string"
-                  }
-                },
-                "requiredParameters": ["accessKey", "secretKey", "leadId", "getFileUrl", "fieldName"],
-                "outputs": ["result"]
+            methods: {
+              sendMessage: {
+                displayName: "sendMessage",
+                type: "execute",
+                inputs: ["phonenr", "scenarioKey", "templateName", "make", "model", "regNo"],
+                requiredInputs: ["phonenr", "scenarioKey", "templateName", "make", "model", "regNo"],
+                requiredParameters: ["phonenr", "scenarioKey", "templateName", "make", "model", "regNo"],
+                outputs: ["result"],
+                data: {
+                  "httpMethod": "POST",
+                  "httpPath": "/advanced"
+                }
               }
             }
           }
@@ -78,8 +84,8 @@
       configuration
     }) {
       switch (objectName) {
-        case "body":
-          await onexecutebody(methodName, parameters, properties, configuration);
+        case "message":
+          await onexecutemessage(methodName, parameters, properties, configuration);
           break;
 
         default:
@@ -87,10 +93,10 @@
       }
     };
 
-    async function onexecutebody(methodName, parameters, properties, configuration) {
+    async function onexecutemessage(methodName, parameters, properties, configuration) {
       switch (methodName) {
-        case "retrieveFileUrl":
-          await onexecutebodyretrieveFileUrl(parameters, properties, configuration);
+        case "sendMessage":
+          await onexecutemessagesendMessage(parameters, properties, configuration);
           break;
 
         default:
@@ -98,14 +104,27 @@
       }
     }
 
-    function onexecutebodyretrieveFileUrl(parameters, properties, configuration) {
+    function onexecutemessagesendMessage(parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
         let urlValue = configuration["ServiceURL"];
-        let httpPath = `/v2/ProspectActivity.svc/Retrieve?accessKey=${parameters["accessKey"]}&secretKey=${parameters["secretKey"]}&leadId=${parameters["leadId"]}&getFileUrl=${parameters["getFileUrl"]}`;
-        let ActivityCode = properties["ActivityCode"];
+        let httpPath = `/advanced`;
+        let phonenr = properties["phonenr"];
+        let scenarioKey = properties["scenarioKey"];
+        let mak = properties["make"];
+        let modl = properties["model"];
+        let registraion = properties["regNo"];
+        let template = properties["templateName"];
         let data = {
-          "Parameter": {
-            "ActivityEvent": ActivityCode
+          "destinations": [{
+            "to": {
+              "phoneNumber": phonenr
+            }
+          }],
+          "scenarioKey": scenarioKey,
+          "whatsApp": {
+            "templateName": template,
+            "templateData": [mak, modl, registraion],
+            "language": "en"
           }
         };
         let xhr = new XMLHttpRequest();
@@ -115,21 +134,20 @@
             if (xhr.readyState !== 4) return;
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
             let obj = JSON.parse(xhr.responseText);
-            imageField = parameters["fieldName"];
-            let mxCustomObj = JSON.parse(obj.ProspectActivities[0].ActivityFields[imageField]);
             postResult({
-              "result": mxCustomObj.mx_CustomObject_1
+              result: xhr.responseText
             });
             resolve();
           } catch (error) {
+            console.log("ERROR: " + error);
             reject(error);
           }
         };
 
         urlValue = urlValue.endsWith("/") ? urlValue : urlValue + "/";
         httpPath = httpPath.startsWith("/") ? httpPath.substr(1) : httpPath + "/";
-        xhr.withCredentials = false;
-        xhr.open("post", urlValue + httpPath);
+        xhr.withCredentials = true;
+        xhr.open("POST", urlValue + httpPath);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(data));
       });
