@@ -1,5 +1,5 @@
 (function () {
-    var = imageField;
+    var imageField;
     metadata = {
       "systemName": "LeadSquaredDocumentUrl.jssp",
       "displayName": "LeadSquaredDocumentUrlJssp",
