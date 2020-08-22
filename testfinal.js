@@ -156,7 +156,7 @@
                   }
                 },
                 "requiredParameters": ["methodUrl", "authToken"],
-                "outputs": ["result"]
+                "outputs": ["message", "status", "registeringAuthority", "registrationNo", "registrationDate", "ownerName", "fitnessUpto", "taxUpto", "rcStatus", "nocDetails", "financierName", "financed", "blackListStatus", "permit", "insuranceName", "policyNo", "validUpto"]
               }
             }
           }
@@ -218,7 +218,8 @@
 
         xhr.withCredentials = false;
         xhr.open("post", urlValue + "?" + httpPath);
-        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send();
       });
     }
 
@@ -228,7 +229,7 @@
         let httpPath = parameters["authToken"];
         let xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function (parameter) {
+        xhr.onreadystatechange = function () {
           try {
             if (xhr.readyState !== 4) return;
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
@@ -278,6 +279,7 @@
         xhr.open("get", urlValue);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("Authorization", "Bearer " + httpPath);
+        xhr.send();
       });
     }
 
