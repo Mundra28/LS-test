@@ -37,8 +37,8 @@
                 description: "template Name"
               },
               templateVariables: {
-                displayName: "templateValue",
-                type: "string",
+                displayName: "templateVariables",
+                type: "array",
                 description: "Please provide comma seperated string values"
               },
               result: {
@@ -111,7 +111,7 @@
           "scenarioKey": scenarioKey,
           "whatsApp": {
             "templateName": template,
-            "templateData": [variable],
+            "templateData": variable,
             "language": "en"
           }
         };
