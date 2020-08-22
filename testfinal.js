@@ -36,20 +36,10 @@
                 type: "string",
                 description: "template Name"
               },
-              make: {
-                displayName: "make",
+              templateVariables: {
+                displayName: "templateValue",
                 type: "string",
-                description: "make of the car"
-              },
-              model: {
-                displayName: "model",
-                type: "string",
-                description: "Model of car"
-              },
-              regNo: {
-                displayName: "regNo",
-                type: "string",
-                description: "Reg no of the car"
+                description: "Please provide comma seperated string values"
               },
               result: {
                 displayName: "Result",
@@ -61,9 +51,9 @@
               sendMessage: {
                 displayName: "sendMessage",
                 type: "execute",
-                inputs: ["phonenr", "scenarioKey", "templateName", "make", "model", "regNo"],
-                requiredInputs: ["phonenr", "scenarioKey", "templateName", "make", "model", "regNo"],
-                requiredParameters: ["phonenr", "scenarioKey", "templateName", "make", "model", "regNo"],
+                inputs: ["phonenr", "scenarioKey", "templateName", "templateVariables"],
+                requiredInputs: ["phonenr", "scenarioKey", "templateName", "templateVariables"],
+                requiredParameters: ["phonenr", "scenarioKey", "templateName", "templateVariables"],
                 outputs: ["result"],
                 data: {
                   "httpMethod": "POST",
@@ -110,10 +100,7 @@
         let httpPath = `/advanced`;
         let phonenr = properties["phonenr"];
         let scenarioKey = properties["scenarioKey"];
-        let mak = properties["make"];
-        let modl = properties["model"];
-        let registraion = properties["regNo"];
-        let template = properties["templateName"];
+        let variable = properties["templateVariables"];
         let data = {
           "destinations": [{
             "to": {
@@ -123,7 +110,7 @@
           "scenarioKey": scenarioKey,
           "whatsApp": {
             "templateName": template,
-            "templateData": [mak,modl,registraion],
+            "templateData": [variable],
             "language": "en"
           }
         };
