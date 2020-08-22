@@ -219,7 +219,6 @@
         xhr.withCredentials = false;
         xhr.open("post", urlValue + "?" + httpPath);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify(data));
       });
     }
 
@@ -279,7 +278,6 @@
         xhr.open("get", urlValue);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("Authorization", "Bearer " + httpPath);
-        xhr.send(JSON.stringify(data));
       });
     }
 
