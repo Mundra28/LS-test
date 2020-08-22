@@ -235,38 +235,22 @@
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
             let obj = JSON.parse(xhr.responseText);
             postResult({
-              "message": obj.message
-            }, {
-              "status": obj.status
-            }, {
-              "registeringAuthority": obj.registeringAuthority
-            }, {
-              "registrationNo": obj.registrationNo
-            }, {
-              "registrationDate": obj.registrationDate
-            }, {
-              "ownerName": obj.ownerName
-            }, {
-              "fitnessUpto": obj.fitnessUpto
-            }, {
-              "taxUpto": obj.taxUpto
-            }, {
-              "rcStatus": obj.rcStatus
-            }, {
-              "nocDetails": obj.nocDetails
-            }, {
-              "financierName": obj.financierName
-            }, {
-              "financed": obj.financed
-            }, {
-              "blackListStatus": obj.blackListStatus
-            }, {
-              "permit": obj.permit
-            }, {
-              "insuranceName": obj.insuranceDetails.insuranceName
-            }, {
-              "policyNo": obj.insuranceDetails.policyNo
-            }, {
+              "message": obj.message,
+              "status": obj.status,
+              "registeringAuthority": obj.registeringAuthority,
+              "registrationNo": obj.registrationNo,
+              "registrationDate": obj.registrationDate,
+              "ownerName": obj.ownerName,
+              "fitnessUpto": obj.fitnessUpto,
+              "taxUpto": obj.taxUpto,
+              "rcStatus": obj.rcStatus,
+              "nocDetails": obj.nocDetails,
+              "financierName": obj.financierName,
+              "financed": obj.financed,
+              "blackListStatus": obj.blackListStatus,
+              "permit": obj.permit,
+              "insuranceName": obj.insuranceDetails.insuranceName,
+              "policyNo": obj.insuranceDetails.policyNo,
               "validUpto": obj.insuranceDetails.validUpto
             });
             resolve();
