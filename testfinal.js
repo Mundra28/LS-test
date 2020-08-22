@@ -100,6 +100,7 @@
         let httpPath = `/advanced`;
         let phonenr = properties["phonenr"];
         let scenarioKey = properties["scenarioKey"];
+        let template = properties["templateName"];
         let variable = properties["templateVariables"];
         let data = {
           "destinations": [{
