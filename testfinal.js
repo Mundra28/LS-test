@@ -23,7 +23,7 @@
             properties: {
               phonenr: {
                 displayName: "PhoneNr",
-                type: "str",
+                type: "string",
                 description: "The Destination Phone nr"
               },
               scenarioKey: {
