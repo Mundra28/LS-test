@@ -159,31 +159,31 @@
 
     async function onexecutemessage(methodName, parameters, properties, configuration) {
       switch (methodName) {
-        case "sendMessage":
+        case "sendMessageWith_1_Variable":
           await onexecutemessagesendMessageWith_1_Variable(parameters, properties, configuration);
           break;
 
-        case "sendMessage":
+        case "sendMessageWith_2_Variable":
           await onexecutemessagesendMessageWith_2_Variable(parameters, properties, configuration);
           break;
 
-        case "sendMessage":
+        case "sendMessageWith_3_Variable":
           await onexecutemessagesendMessageWith_3_Variable(parameters, properties, configuration);
           break;
 
-        case "sendMessage":
+        case "sendMessageWith_4_Variable":
           await onexecutemessagesendMessageWith_4_Variable(parameters, properties, configuration);
           break;
 
-        case "sendMessage":
+        case "sendMessageWith_5_Variable":
           await onexecutemessagesendMessageWith_5_Variable(parameters, properties, configuration);
           break;
 
-        case "sendMessage":
+        case "sendMessageWith_6_Variable":
           await onexecutemessagesendMessageWith_6_Variable(parameters, properties, configuration);
           break;
 
-        case "sendMessage":
+        case "sendMessageWith_7_Variable":
           await onexecutemessagesendMessageWith_7_Variable(parameters, properties, configuration);
           break;
 
