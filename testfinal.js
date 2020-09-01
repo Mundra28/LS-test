@@ -71,6 +71,16 @@
                 type: "string",
                 description: "Template variable values"
               },
+              docUrl: {
+                displayName: "docUrl",
+                type: "string",
+                description: "Url of the document"
+              },
+              fileName: {
+                displayName: "fileName",
+                type: "string",
+                description: "Name of the file"
+              },
               result: {
                 displayName: "Result",
                 type: "string",
@@ -133,6 +143,14 @@
                 requiredInputs: ["phonenr", "scenarioKey", "templateName", "templatVariable_1", "templatVariable_2", "templatVariable_3", "templatVariable_4", "templatVariable_5", "templatVariable_6", "templatVariable_7"],
                 requiredParameters: ["phonenr", "scenarioKey", "templateName", "templatVariable_1", "templatVariable_2", "templatVariable_3", "templatVariable_4", "templatVariable_5", "templatVariable_6", "templatVariable_7"],
                 outputs: ["result"]
+              },
+              sendMediaTemplateMessage: {
+                displayName: "sendMediaTemplateMessage",
+                type: "execute",
+                inputs: ["phonenr", "scenarioKey", "templateName", "templatVariable_1", "templatVariable_2", "templatVariable_3", "templatVariable_4", "docUrl", "fileName"],
+                requiredInputs: ["phonenr", "scenarioKey", "templateName", "templatVariable_1", "templatVariable_2", "templatVariable_3", "templatVariable_4", "docUrl", "fileName"],
+                requiredParameters: ["phonenr", "scenarioKey", "templateName", "templatVariable_1", "templatVariable_2", "templatVariable_3", "templatVariable_4", "docUrl", "fileName"],
+                outputs: ["result"]
               }
             }
           }
@@ -185,6 +203,10 @@
 
         case "sendMessageWith_7_Variable":
           await onexecutemessagesendMessageWith_7_Variable(parameters, properties, configuration);
+          break;
+
+        case "sendMediaTemplateMessage":
+          await onexecutemessagesendMediaTemplateMessage(parameters, properties, configuration);
           break;
 
         default:
@@ -513,6 +535,66 @@
           "whatsApp": {
             "templateName": template,
             "templateData": [a, b, c, d, e, f, g],
+            "language": "en"
+          }
+        };
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+          try {
+            if (xhr.readyState !== 4) return;
+            if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
+            let obj = JSON.parse(xhr.responseText);
+            postResult({
+              result: xhr.responseText
+            });
+            resolve();
+          } catch (error) {
+            console.log("ERROR: " + error);
+            reject(error);
+          }
+        };
+
+        urlValue = urlValue.endsWith("/") ? urlValue : urlValue + "/";
+        httpPath = httpPath.startsWith("/") ? httpPath.substr(1) : httpPath + "/";
+        xhr.withCredentials = true;
+        xhr.open("POST", urlValue + httpPath);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(data));
+      });
+    }
+
+    function onexecutemessagesendMediaTemplateMessage(parameters, properties, configuration) {
+      return new Promise((resolve, reject) => {
+        let urlValue = configuration["ServiceURL"];
+        let httpPath = `/advanced`;
+        let phonenr = properties["phonenr"];
+        let scenarioKey = properties["scenarioKey"];
+        let template = properties["templateName"];
+        let a = properties["templatVariable_1"];
+        let b = properties["templatVariable_2"];
+        let c = properties["templatVariable_3"];
+        let d = properties["templatVariable_4"];
+        let url = properties["docUrl"];
+        let fName = properties["fileName"];
+        let data = {
+          "destinations": [{
+            "to": {
+              "phoneNumber": phonenr
+            }
+          }],
+          "scenarioKey": scenarioKey,
+          "whatsApp": {
+            "templateName": template,
+            "mediaTemplateData": {
+              "header": {
+                "documentUrl": url,
+                "documentFilename": fileName
+              },
+              "body": {
+                "placeholders": [a, b, c, d]
+              }
+            },
             "language": "en"
           }
         };
