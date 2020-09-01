@@ -589,7 +589,7 @@
             "mediaTemplateData": {
               "header": {
                 "documentUrl": url,
-                "documentFilename": fileName
+                "documentFilename": fName
               },
               "body": {
                 "placeholders": [a, b, c, d]
