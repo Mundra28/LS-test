@@ -48,6 +48,11 @@
               displayName: "transportationUrl",
               type: "string",
               description: "transportationUrl variable values"
+            },
+            result: {
+              displayName: "result",
+              type: "string",
+              description: "result"
             }
           },
           methods: {
