@@ -150,7 +150,7 @@
           }
 
           postResult({
-            result: match.amount
+            "result": match.amount
           });
         } catch (error) {
           reject(error);
