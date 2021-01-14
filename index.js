@@ -136,6 +136,9 @@
           const match = JSON.parse(intercityChargesJson).find(e => e.destination === properties["destination"] && e.source === properties["source"] && e.carIntercityType === intercityType);
 
           if (match.amount) {
+            postResult({
+              result: match.amount
+            });
             resolve(match.amount);
           } else {
             console.log('no intecityType found', match);
