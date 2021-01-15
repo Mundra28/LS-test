@@ -146,7 +146,7 @@
         }
       };
 
-      xhrIntercityType.open("GET", intercityTypeUrl);
+      xhrIntercityType.open("GET", "https://storage.googleapis.com/k2-files-test/files/IntercityType.csv");
       xhrIntercityType.send();
     });
   }
@@ -178,7 +178,7 @@
         }
       };
 
-      xhrIntercityCharges.open("GET", interCityChargesUrl);
+      xhrIntercityCharges.open("GET", "https://storage.googleapis.com/k2-files-test/files/TransportationCharges.csv");
       xhrIntercityCharges.send();
     });
   }
