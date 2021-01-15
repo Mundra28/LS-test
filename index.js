@@ -123,6 +123,7 @@
   function onexecutemessageextractIntercityType(parameters, properties, configuration) {
     return new Promise((resolve, reject) => {
       var xhrIntercityType = new XMLHttpRequest();
+      intercityTypeUrl = parameters["intercityTypeUrl"];
 
       xhrIntercityType.onreadystatechange = function () {
         try {
@@ -130,7 +131,7 @@
           if (xhrIntercityType.status !== 200 && xhrIntercityType.status !== 201) throw new Error("Failed with status " + xhrIntercityType.status);
           intercityTypeCsv = xhrIntercityType.responseText;
           intercityTypeJson = csvJSON(intercityTypeCsv);
-          intercityTypeUrl = parameters["intercityTypeUrl"];
+          
           const car = JSON.parse(intercityTypeJson).find(e => e.make === parameters["make"] && e.makeModel === parameters["makeModel"] && e.year === parameters["year"]);
 
           if (car.carIntercityType) {
@@ -146,7 +147,7 @@
         }
       };
 
-      xhrIntercityType.open("GET", "https://storage.googleapis.com/k2-files-test/files/IntercityType.csv");
+      xhrIntercityType.open("GET", intercityTypeUrl);
       xhrIntercityType.send();
     });
   }
@@ -154,6 +155,7 @@
   function onexecutemessagegetCharge(parameters, properties, configuration, intercityType) {
     return new Promise((resolve, reject) => {
       var xhrIntercityCharges = new XMLHttpRequest();
+      interCityChargesUrl = parameters["transportationUrl"];
 
       xhrIntercityCharges.onreadystatechange = function () {
         try {
@@ -161,7 +163,7 @@
           if (xhrIntercityCharges.status !== 200 && xhrIntercityCharges.status !== 201) throw new Error("Failed with status " + xhrIntercityCharges.status);
           intercityChargesCsv = xhrIntercityCharges.responseText;
           intercityChargesJson = csvJSON(intercityChargesCsv);
-          interCityChargesUrl = parameters["transportationUrl"];
+          
           intercityType = parameters["interType"];
           const match = JSON.parse(intercityChargesJson).find(e => e.destination === parameters["destination"] && e.source === parameters["source"] && e.carIntercityType === intercityType);
 
@@ -178,7 +180,7 @@
         }
       };
 
-      xhrIntercityCharges.open("GET", "https://storage.googleapis.com/k2-files-test/files/TransportationCharges.csv");
+      xhrIntercityCharges.open("GET", interCityChargesUrl);
       xhrIntercityCharges.send();
     });
   }
