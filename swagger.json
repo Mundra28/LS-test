@@ -1,0 +1,124 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "K2-Payu "
+  },
+  "host": "api-staging.cashmycar.in",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/payment/request": {
+      "post": {
+        "summary": "Post acitivity on a particular Lead",
+        "operationId": "addActivity",
+        "tags": [
+          "Middleware APIs"
+        ],
+        "parameters": [
+          {
+            "name": "x-jwt-token",
+            "in": "header",
+            "type": "string",
+            "description": "token of the user"
+          },
+          {
+            "name": "clientId",
+            "in": "query",
+            "type": "string",
+            "description": "clientId of the user"
+          },
+          {
+            "name": "leadId",
+            "in": "query",
+            "description": "leadId of the user",
+            "type": "string"
+          },
+          {
+            "name": "paymentProvider",
+            "in": "query",
+            "type": "string",
+            "description": "paymentProvider of the user"
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "productType of the user",
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "type": "number",
+            "description": "amount of the user"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "email of the user",
+            "type": "string"
+          },
+          {
+            "name": "firstName",
+            "in": "query",
+            "type": "string",
+            "description": "firstName of the user"
+          },
+          {
+            "name": "mobile",
+            "in": "query",
+            "description": "mobile of the user",
+            "type": "string"
+          },
+          {
+            "name": "lastName",
+            "in": "query",
+            "type": "string",
+            "description": "lastName of the user"
+          },
+          {
+            "name": "uniqueId",
+            "in": "query",
+            "description": "uniqueId of the user",
+            "type": "string"
+          },
+          {
+            "name": "companyName",
+            "in": "query",
+            "type": "string",
+            "description": "companyName of the user"
+          },
+          {
+            "name": "custom2",
+            "in": "query",
+            "description": "leadNo of the user",
+            "type": "string"
+          },
+          {
+            "name": "custom1",
+            "in": "query",
+            "description": "RegNo of the user",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is the status code for successful API call",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "responseMessage": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  }
+}
