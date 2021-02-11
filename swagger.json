@@ -54,6 +54,17 @@
     "results": {
       "type": "object",
       "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/resultValues"
+          }
+        }
+      }
+    },
+    "resultValues": {
+      "type": "object",
+      "properties": {
         "formatted_address": {
           "type": "string"
         },
