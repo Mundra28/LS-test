@@ -59,7 +59,8 @@
         "responses": {
           "200": {
             "description": "This is the status code for successful API call",
-            "$ref": "#/definitions/token"
+            "schema":
+              "$ref": "#/definitions/token"
           },
           "default": {
             "description": "Unexpected error"
