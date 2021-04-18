@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Salesforce - K2 "
+  },
+  "host": "olx-panamera.my.salesforce.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/services/data/v41.0/query": {
+      "get": {
+        "summary": "Get Account URL",
+        "operationId": "getAccountId",
+        "tags": [
+          "SalesforceAPIs"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "type": "string",
+            "description": "query of the user",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "type": "string",
+            "description": "Beaer {{token}}",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is the status code for successful API call",
+            "schema": {
+              "$ref": "#/definitions/accountURL"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "accountURL": {
+      "type": "object",
+      "properties": {
+        "totalSize": {
+          "type": "string"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/records"
+          }
+        }
+      }
+    },
+    "records": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            }
+          }
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Primary_Mobile__c": {
+          "type": "string"
+        },
+        "Email__c": {
+          "type": "string"
+        },
+        "BillingStreet": {
+          "type": "string"
+        },
+        "BillingCity": {
+          "type": "string"
+        },
+        "BillingState": {
+          "type": "string"
+        },
+        "CMC_City_Mapping__c": {
+          "type": "string"
+        },
+        "Eligible_in_TCS__c": {
+          "type": "boolean"
+        },
+        "X6_Digit_FCG_Id__c": {
+          "type": "string"
+        },
+        "Total_Payment_Received_for_Onboarding__c": {
+          "type": "number"
+        },
+        "RC_Transfer_Count_Post_90_Days_Delivery__c": {
+          "type": "number"
+        },
+        "Dealer_Inventory_More_Than_90_Days__c": {
+          "type": "number"
+        },
+        "Forfeiture_Applicable__c": {
+          "type": "number"
+        },
+        "Dealer_Financing_Eligible__c": {
+          "type": "boolean"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Dealer_Onboarding__r": {
+          "type": "object",
+          "properties": {
+            "Name_on_Cancelled_Cheque__c": {
+              "type": "string"
+            },
+            "Notional_Credit__c": {
+              "type": "string"
+            },
+            "IFSC_code_on_Cancelled_Cheque__c": {
+              "type": "string"
+            },
+            "Bank_Account_Number__c": {
+              "type": "string"
+            },
+            "Home_Delivery_Status__c": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
