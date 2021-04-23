@@ -320,12 +320,12 @@
     async function onexecuteSalesforceIntegration(methodName, parameters, properties, configuration) {
       switch (methodName) {
         case "generateToken":
-          var tok = await onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration);
+          var tok = await onexecuteSalesforceIntegrationgenerateToken(parameters);
           await onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, tok);
           break;
 
         case "accountDetails":
-          var tok = await onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration);
+          var tok = await onexecuteSalesforceIntegrationgenerateToken(parameters);
           await onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, tok);
           break;
 
@@ -345,7 +345,12 @@
     function onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
         let urlValue = parameters["toke_url"];
-        let httpPath = `grant_type=${configuration["grant_type"]}&client_id=${configuration["client_id"]}&client_secret=${configuration["client_secret"]}&username=${configuration["username"]}&password=${configuration["password"]}`;
+        var data = new FormData();
+        data.append('grant_type', 'password');
+        data.append('client_id', '3MVG9N6eDmZRVJOnipGVBgmEvwhCHPQNe_FpjuUev34zZ0TjyTAYhDRs3wT7FA5q1wjAjkOHXsx==');
+        data.append('client_secret', '6B0FD69D60400F9A96A129CE14C9EF14836B6C9F99817FACAECB4D4D887C8D73');
+        data.append('username', 'k2integration@olx.com');
+        data.append('password', 'k2salesforce123n53F4lseZBKt6b5NmUEYNR0L');
         let xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
@@ -365,7 +370,7 @@
         xhr.withCredentials = false;
         xhr.open("post", 'https://login.salesforce.com/services/oauth2/token', true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send(httpPath);
+        xhr.send(data);
       });
     }
 
