@@ -81,6 +81,13 @@
                 "type": "String",
                 "description": "BillingPostalCode"
               },
+              "BillingCountry": {
+                "displayName": "BillingCountry",
+                "type": "String",
+                "description": "BillingCountry"
+              },
+
+              
               "CMC_City_Mapping__c": {
                 "displayName": "CMC_City_Mapping__c",
                 "type": "String",
