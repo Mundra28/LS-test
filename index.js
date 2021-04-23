@@ -320,7 +320,8 @@
           break;
 
         case "accountDetails":
-          await onexecuteSalesforceIntegrationaccountDetails(parameters);
+          var tok = await onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration);
+          await onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, tok);
           break;
 
         case "updateAccountDetails":
