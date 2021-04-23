@@ -86,8 +86,6 @@
                 "type": "String",
                 "description": "BillingCountry"
               },
-
-              
               "CMC_City_Mapping__c": {
                 "displayName": "CMC_City_Mapping__c",
                 "type": "String",
@@ -365,9 +363,9 @@
         };
 
         xhr.withCredentials = false;
-        xhr.open("post", urlValue + "?" + httpPath);
+        xhr.open("post", urlValue);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send();
+        xhr.send(httpPath);
       });
     }
 
