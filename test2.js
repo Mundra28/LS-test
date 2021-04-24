@@ -43,7 +43,7 @@
               },
               "type": {
                 "displayName": "type",
-                "type": "string",
+                "type": "number",
                 "description": "type of call"
               },
               "Name": {
@@ -314,7 +314,7 @@
           break;
 
         case "accountDetails":
-          var tok = await onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration);
+          await onexecuteSalesforceIntegrationaccountDetails(parameters);
           break;
 
         case "updateAccountDetails":
@@ -355,6 +355,51 @@
         xhr.open("post", 'https://login.salesforce.com/services/oauth2/token');
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(httpPath);
+      });
+    }
+
+    function onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration) {
+      return new Promise((resolve, reject) => {
+        let urlValue = parameters["methodUrl"];
+        let httpPath = parameters["token"];
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+          try {
+            if (xhr.readyState !== 4) return;
+            if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status);
+            let obj = JSON.parse(xhr.responseText);
+            postResult({
+              "type": obj.records.totalSize,
+              "Name": obj.records.Name,
+              "Primary_Mobile__c": obj.records.Primary_Mobile__c,
+              "Email__c": obj.records.Email__c,
+              "BillingStreet": obj.records.BillingStreet,
+              "BillingCity": obj.records.BillingCity,
+              "BillingState": obj.records.BillingState,
+              "BillingPostalCode": obj.records.BillingPostalCode,
+              "BillingCountry": obj.records.BillingCountry,
+              "CMC_City_Mapping__c": obj.records.CMC_City_Mapping__c,
+              "Eligible_in_TCS__c": obj.records.Eligible_in_TCS__c,
+              "X6_Digit_FCG_Id__c": obj.records.X6_Digit_FCG_Id__c,
+              "Total_Payment_Received_for_Onboarding__c": obj.records.Total_Payment_Received_for_Onboarding__c,
+              "RC_Transfer_Count_Post_90_Days_Delivery__c": obj.records.RC_Transfer_Count_Post_90_Days_Delivery__c,
+              "Forfeiture_Applicable__c": obj.records.Forfeiture_Applicable__c,
+              "Dealer_Inventory_More_Than_90_Days__c": obj.records.Dealer_Inventory_More_Than_90_Days__c,
+              "Dealer_Financing_Eligible__c": obj.records.Dealer_Financing_Eligible__c,
+              "Id": obj.records.Id
+            });
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+        };
+
+        xhr.withCredentials = false;
+        xhr.open("get", urlValue);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Authorization", "Bearer " + httpPath);
+        xhr.send();
       });
     }
 
