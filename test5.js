@@ -372,7 +372,6 @@
             postResult({
               "type": obj.records.totalSize,
               "Name": obj,
-                
               "Primary_Mobile__c": obj.records.Primary_Mobile__c,
               "Email__c": obj.records.Email__c,
               "BillingStreet": obj.records.BillingStreet,
@@ -397,7 +396,7 @@
         };
 
         xhr.withCredentials = false;
-        xhr.open("get", urlValue);
+        xhr.open("get", 'https://olx-panamera.my.salesforce.com/services/data/v41.0/query?q=Select  Name,Primary_Mobile__c, Email__c, BillingStreet,BillingCity,BillingState, BillingPostalCode, BillingCountry, CMC_City_Mapping__c, Eligible_in_TCS__c, X6_Digit_FCG_Id__c, Total_Payment_Received_for_Onboarding__c,RC_Transfer_Count_Post_90_Days_Delivery__c, Forfeiture_Applicable__c,Dealer_Inventory_More_Than_90_Days__c,Dealer_Financing_Eligible__c, Id ,Dealer_Onboarding__r.Name_on_Cancelled_Cheque__c, Dealer_Onboarding__r.Notional_Credit__c ,Dealer_Onboarding__r.IFSC_code_on_Cancelled_Cheque__c, Dealer_Onboarding__r.Bank_Account_Number__c , Dealer_Onboarding__r.Home_Delivery_Status__c from Account where FCG_Id__c='7f3bf9f8-2d63-499a-abe8-e94ee8dd67f9'');
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("Authorization", "Bearer " + httpPath);
         xhr.send();
