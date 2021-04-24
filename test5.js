@@ -371,7 +371,7 @@
             let obj = JSON.parse(xhr.responseText);
             postResult({
               "type": obj.records.totalSize,
-              "Name": obj.records.Name,
+              "Name": obj,
               "Primary_Mobile__c": obj.records.Primary_Mobile__c,
               "Email__c": obj.records.Email__c,
               "BillingStreet": obj.records.BillingStreet,
