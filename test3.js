@@ -180,7 +180,7 @@
         urlValue = urlValue.endsWith("/") ? urlValue : urlValue + "/";
         httpPath = httpPath.startsWith("/") ? httpPath.substr(1) : httpPath + "/";
         xhr.open("post", urlValue + httpPath);
-        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(JSON.stringify(data));
       });
     }
