@@ -361,7 +361,7 @@
     function onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
         let urlValue = parameters["methodUrl"];
-        let httpPath = parameters["token"];
+        let httpPath = parameters["authToken"];
         let xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
