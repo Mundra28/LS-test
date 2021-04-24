@@ -408,7 +408,6 @@
         let urlValue = parameters["methodUrl"];
         let httpPath = parameters["authToken"];
         let xhr = new XMLHttpRequest();
-
         xhr.onreadystatechange = function () {
           try {
             if (xhr.readyState !== 4) return;
