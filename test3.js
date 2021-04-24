@@ -151,7 +151,7 @@
 
     function onexecutetokengenerateToken(parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
-        let urlValue = 'https://login.salesforce.com';
+        let urlValue = 'https://test.salesforce.com';
         let httpPath = `/services/oauth2/token`;
         let data = {
           "Parameters": {
