@@ -346,7 +346,7 @@
             postResult({
               "token": obj.access_token
             });
-            resolve();
+            resolve(obj.access_token);
           } catch (error) {
             reject(error);
           }
