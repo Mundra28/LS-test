@@ -630,7 +630,7 @@
     function onexecuteaccountURLgetAccountId(parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
         let urlValue = configuration["ServiceURL"];
-        let httpPath = `/query`;
+        let httpPath = `/services/data/v41.0/query?=q=Select  Name,Primary_Mobile__c, Email__c, BillingStreet,BillingCity,BillingState, BillingPostalCode, BillingCountry, CMC_City_Mapping__c, Eligible_in_TCS__c, X6_Digit_FCG_Id__c, Total_Payment_Received_for_Onboarding__c,RC_Transfer_Count_Post_90_Days_Delivery__c, Forfeiture_Applicable__c,Dealer_Inventory_More_Than_90_Days__c,Dealer_Financing_Eligible__c, Id ,Dealer_Onboarding__r.Name_on_Cancelled_Cheque__c, Dealer_Onboarding__r.Notional_Credit__c ,Dealer_Onboarding__r.IFSC_code_on_Cancelled_Cheque__c, Dealer_Onboarding__r.Bank_Account_Number__c , Dealer_Onboarding__r.Home_Delivery_Status__c from Account where FCG_Id__c='7f3bf9f8-2d63-499a-abe8-e94ee8dd67f9`;
         let xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
@@ -648,7 +648,9 @@
         };
 
         urlValue = urlValue.endsWith("/") ? urlValue : urlValue + "/";
-        httpPath = httpPath.startsWith("/") ? httpPath.substr(1) : httpPath + "/";
+       // httpPath = httpPath.startsWith("/") ? httpPath.substr(1) : httpPath + "/";
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Authorization", "Bearer 00D7F000000rkY1!ARQAQB.zNv20Kn8GD7g0frJKkZtZyZBxFXd7wsfkt8jbVkgIBwoTGpo9985qllYsDEqbuc6egMFx7ft_R13MjKYZBpL4jRFg");
         xhr.open("get", urlValue + httpPath);
         xhr.send();
       });
