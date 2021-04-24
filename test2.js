@@ -388,12 +388,7 @@
               "Forfeiture_Applicable__c": obj.records.Forfeiture_Applicable__c,
               "Dealer_Inventory_More_Than_90_Days__c": obj.records.Dealer_Inventory_More_Than_90_Days__c,
               "Dealer_Financing_Eligible__c": obj.records.Dealer_Financing_Eligible__c,
-              "Id": obj.records.Id,
-              "Name_on_Cancelled_Cheque__c": obj.records.Dealer_Onboarding__r.Name_on_Cancelled_Cheque__c,
-              "Notional_Credit__c": obj.records.Dealer_Onboarding__r.Notional_Credit__c,
-              "IFSC_code_on_Cancelled_Cheque__c": obj.records.Dealer_Onboarding__r.IFSC_code_on_Cancelled_Cheque__c,
-              "Bank_Account_Number__c": obj.records.Dealer_Onboarding__r.Bank_Account_Number__c,
-              "Home_Delivery_Status__c": obj.records.Dealer_Onboarding__r.Home_Delivery_Status__c
+              "Id": obj.records.Id
             });
             resolve();
           } catch (error) {
