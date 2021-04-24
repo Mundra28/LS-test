@@ -368,8 +368,8 @@
         };
 
         xhr.withCredentials = false;
-        xhr.open("post", 'https://login.salesforce.com/services/oauth2/token', true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.open("post", 'https://login.salesforce.com/services/oauth2/token');
+        xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary={'name':'username'}");
         xhr.send(data);
       });
     }
