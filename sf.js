@@ -23,6 +23,10 @@
         "password": {
           "displayName": "password",
           "type": "string"
+        },
+        "toke_url": {
+          "displayName": "password",
+          "type": "string"
         }
       }
     };
@@ -227,7 +231,7 @@
                     "type": "string"
                   }
                 },
-                "requiredParameters": ["toke_url"],
+                "requiredParameters": [],
                 "outputs": ["token"]
               },
               "accountDetails": {
@@ -245,7 +249,7 @@
                     "type": "string"
                   }
                 },
-                "requiredParameters": ["methodUrl", "authToken"],
+                "requiredParameters": ["methodUrl"],
                 "outputs": ["type", "Name", "Primary_Mobile__c", "Email__c", "BillingStreet", "BillingCity", "BillingState", "BillingPostalCode", "BillingCountry", "CMC_City_Mapping__c", "Eligible_in_TCS__c", "X6_Digit_FCG_Id__c", "Total_Payment_Received_for_Onboarding__c", "RC_Transfer_Count_Post_90_Days_Delivery__c", "Forfeiture_Applicable__c", "Dealer_Inventory_More_Than_90_Days__c", "Dealer_Financing_Eligible__c", "Id", "Name_on_Cancelled_Cheque__c", "Notional_Credit__c", "IFSC_code_on_Cancelled_Cheque__c", "Bank_Account_Number__c", "Home_Delivery_Status__c", "Public_URL__c"]
               },
               "updateAccountDetails": {
@@ -337,7 +341,7 @@
 
     function onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
-        let urlValue = parameters["toke_url"];
+        let urlValue = configuration["toke_url"];
         let httpPath = encodeURI(`grant_type=${configuration["grant_type"]}&client_id=${configuration["client_id"]}&client_secret=${configuration["client_secret"]}&username=${configuration["username"]}&password=${configuration["password"]}`);
         let xhr = new XMLHttpRequest();
         console.log(httpPath);
@@ -350,7 +354,7 @@
             postResult({
               "token": obj.access_token
             });
-            resolve(obj.access_token);
+            resolve(obj);
           } catch (error) {
             reject(error);
           }
