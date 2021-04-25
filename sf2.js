@@ -318,7 +318,8 @@
           break;
 
         case "accountDetails":
-          let token = "00D7F000000rkY1!ARQAQB.zNv20Kn8GD7g0frJKkZtZyZBxFXd7wsfkt8jbVkgIBwoTGpo9985qllYsDEqbuc6egMFx7ft_R13MjKYZBpL4jRFg";
+          const value = await onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration);
+          let token = value['access_token'];
           await onexecuteSalesforceIntegrationaccountDetails(token, parameters);
           break;
 
