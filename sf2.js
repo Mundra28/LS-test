@@ -219,6 +219,11 @@
                 "displayName": "result",
                 "type": "string",
                 "description": "result of call"
+              },
+              "token": {
+                "displayName": "result",
+                "type": "string",
+                "description": "result of call"
               }
             },
             "methods": {
@@ -250,7 +255,7 @@
                   }
                 },
                 "requiredParameters": ["methodUrl"],
-                "outputs": ["type", "Name", "Primary_Mobile__c", "Email__c", "BillingStreet", "BillingCity", "BillingState", "BillingPostalCode", "BillingCountry", "CMC_City_Mapping__c", "Eligible_in_TCS__c", "X6_Digit_FCG_Id__c", "Total_Payment_Received_for_Onboarding__c", "RC_Transfer_Count_Post_90_Days_Delivery__c", "Forfeiture_Applicable__c", "Dealer_Inventory_More_Than_90_Days__c", "Dealer_Financing_Eligible__c", "Id", "Name_on_Cancelled_Cheque__c", "Notional_Credit__c", "IFSC_code_on_Cancelled_Cheque__c", "Bank_Account_Number__c", "Home_Delivery_Status__c", "Public_URL__c"]
+                "outputs": ["token", "type", "Name", "Primary_Mobile__c", "Email__c", "BillingStreet", "BillingCity", "BillingState", "BillingPostalCode", "BillingCountry", "CMC_City_Mapping__c", "Eligible_in_TCS__c", "X6_Digit_FCG_Id__c", "Total_Payment_Received_for_Onboarding__c", "RC_Transfer_Count_Post_90_Days_Delivery__c", "Forfeiture_Applicable__c", "Dealer_Inventory_More_Than_90_Days__c", "Dealer_Financing_Eligible__c", "Id", "Name_on_Cancelled_Cheque__c", "Notional_Credit__c", "IFSC_code_on_Cancelled_Cheque__c", "Bank_Account_Number__c", "Home_Delivery_Status__c", "Public_URL__c"]
               },
               "updateAccountDetails": {
                 "displayName": "updateAccountDetails",
@@ -318,8 +323,10 @@
           break;
 
         case "accountDetails":
-          let token = "00D7F000000rkY1!ARQAQB.zNv20Kn8GD7g0frJKkZtZyZBxFXd7wsfkt8jbVkgIBwoTGpo9985qllYsDEqbuc6egMFx7ft_R13MjKYZBpL4jRFg";
-          await onexecuteSalesforceIntegrationaccountDetails(token, parameters);
+          const value = await onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration);
+          let token = value['access_token'];
+          const val = await onexecuteSalesforceIntegrationaccountDetails(token, parameters);
+          console.log(val);
           break;
 
         case "updateAccountDetails":
@@ -372,9 +379,10 @@
         xhr.onreadystatechange = function () {
           try {
             if (xhr.readyState !== 4) return;
-            if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status + urlValue + t);
+            if (xhr.status !== 200 && xhr.status !== 201) throw new Error(`Failed with status:  ${xhr.status} token: ${t}`);
             let obj = JSON.parse(xhr.responseText);
             postResult({
+              "token": t,
               "type": obj.totalSize,
               "Name": obj.records[0].Name,
               "Primary_Mobile__c": obj.records[0].Primary_Mobile__c,
@@ -399,7 +407,7 @@
               "Bank_Account_Number__c": obj.records[0].Dealer_Onboarding__r.Bank_Account_Number__c,
               "Home_Delivery_Status__c": obj.records[0].Dealer_Onboarding__r.Home_Delivery_Status__c
             });
-            resolve();
+            resolve(obj);
           } catch (error) {
             reject(error);
           }
