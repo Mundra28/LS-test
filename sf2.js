@@ -219,11 +219,6 @@
                 "displayName": "result",
                 "type": "string",
                 "description": "result of call"
-              },
-              "token": {
-                "displayName": "result",
-                "type": "string",
-                "description": "result of call"
               }
             },
             "methods": {
@@ -255,7 +250,7 @@
                   }
                 },
                 "requiredParameters": ["methodUrl"],
-                "outputs": ["token", "type", "Name", "Primary_Mobile__c", "Email__c", "BillingStreet", "BillingCity", "BillingState", "BillingPostalCode", "BillingCountry", "CMC_City_Mapping__c", "Eligible_in_TCS__c", "X6_Digit_FCG_Id__c", "Total_Payment_Received_for_Onboarding__c", "RC_Transfer_Count_Post_90_Days_Delivery__c", "Forfeiture_Applicable__c", "Dealer_Inventory_More_Than_90_Days__c", "Dealer_Financing_Eligible__c", "Id", "Name_on_Cancelled_Cheque__c", "Notional_Credit__c", "IFSC_code_on_Cancelled_Cheque__c", "Bank_Account_Number__c", "Home_Delivery_Status__c", "Public_URL__c"]
+                "outputs": ["type", "Name", "Primary_Mobile__c", "Email__c", "BillingStreet", "BillingCity", "BillingState", "BillingPostalCode", "BillingCountry", "CMC_City_Mapping__c", "Eligible_in_TCS__c", "X6_Digit_FCG_Id__c", "Total_Payment_Received_for_Onboarding__c", "RC_Transfer_Count_Post_90_Days_Delivery__c", "Forfeiture_Applicable__c", "Dealer_Inventory_More_Than_90_Days__c", "Dealer_Financing_Eligible__c", "Id", "Name_on_Cancelled_Cheque__c", "Notional_Credit__c", "IFSC_code_on_Cancelled_Cheque__c", "Bank_Account_Number__c", "Home_Delivery_Status__c", "Public_URL__c"]
               },
               "updateAccountDetails": {
                 "displayName": "updateAccountDetails",
@@ -323,10 +318,7 @@
           break;
 
         case "accountDetails":
-          const value = await onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration);
-          let token = value['access_token'];
-          const val = await onexecuteSalesforceIntegrationaccountDetails(token, parameters);
-          console.log(val);
+          await onexecuteSalesforceIntegrationaccountDetails(parameters);
           break;
 
         case "updateAccountDetails":
@@ -347,7 +339,6 @@
         let urlValue = configuration["toke_url"];
         let httpPath = encodeURI(`grant_type=${configuration["grant_type"]}&client_id=${configuration["client_id"]}&client_secret=${configuration["client_secret"]}&username=${configuration["username"]}&password=${configuration["password"]}`);
         let xhr = new XMLHttpRequest();
-        console.log(httpPath);
 
         xhr.onreadystatechange = function () {
           try {
@@ -370,19 +361,18 @@
       });
     }
 
-    function onexecuteSalesforceIntegrationaccountDetails(token, parameters, properties, configuration) {
+    function onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
         let urlValue = parameters["methodUrl"];
-       // var t = token;
-        var xhr = new XMLHttpRequest();
+        let httpPath = parameters["authToken"];
+        let xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
           try {
             if (xhr.readyState !== 4) return;
-            if (xhr.status !== 200 && xhr.status !== 201) throw new Error(`Failed with status:  ${xhr.status}`);
-            var obj = JSON.parse(xhr.responseText);
+            if (xhr.status !== 200 && xhr.status !== 201) throw new Error(`Failed with status:  ${xhr.status} token: ${t}`);
+            let obj = JSON.parse(xhr.responseText);
             postResult({
-              "token": `${token}`,
               "type": obj.totalSize,
               "Name": obj.records[0].Name,
               "Primary_Mobile__c": obj.records[0].Primary_Mobile__c,
@@ -415,7 +405,7 @@
 
         xhr.withCredentials = false;
         xhr.open("get", urlValue);
-        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+        xhr.setRequestHeader("Authorization", "Bearer " + httpPath);
         xhr.send();
       });
     }
