@@ -316,7 +316,7 @@
         case "accountDetails":
           onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration).then(async function resolved(value) {
             let token = value['access_token'];
-            await onexecuteSalesforceIntegrationaccountDetails(parameters);
+            await onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, token);
           }, function errored(error) {
             throw new Error("Failed to get the token" + error + parameters["grant_type"] + parameters["client_id"]);
           });
@@ -407,7 +407,7 @@
 
         xhr.withCredentials = false;
         xhr.open("get", urlValue);
-        xhr.setRequestHeader("Authorization", "Bearer " + tok);
+        xhr.setRequestHeader("Authorization", "Bearer " + token);
         xhr.send();
       });
     }
