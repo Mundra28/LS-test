@@ -47,7 +47,7 @@
               },
               "type": {
                 "displayName": "type",
-                "type": "number",
+                "type": "string",
                 "description": "type of call"
               },
               "Name": {
