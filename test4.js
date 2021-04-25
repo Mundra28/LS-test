@@ -314,7 +314,8 @@
           break;
 
         case "accountDetails":
-          await onexecuteSalesforceIntegrationaccountDetails(parameters);
+          var tok = await onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration);
+          await onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, tok);
           break;
 
         case "updateAccountDetails":
@@ -358,7 +359,7 @@
       });
     }
 
-    function onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration) {
+    function onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, tok) {
       return new Promise((resolve, reject) => {
         let urlValue = parameters["methodUrl"];
         let httpPath = parameters["authToken"];
@@ -402,7 +403,7 @@
 
         xhr.withCredentials = false;
         xhr.open("get", urlValue);
-        xhr.setRequestHeader("Authorization", "Bearer " + httpPath);
+        xhr.setRequestHeader("Authorization", "Bearer " + tok);
         xhr.send();
       });
     }
