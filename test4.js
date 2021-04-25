@@ -314,8 +314,12 @@
           break;
 
         case "accountDetails":
-          var tok = await onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration);
-          await onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, tok);
+          onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration).then(async function resolved(value) {
+            let token = value['access_token'];
+            await onexecuteSalesforceIntegrationaccountDetails(parameters);
+          }, function errored(error) {
+            throw new Error("Failed to get the token" + error + parameters["grant_type"] + parameters["client_id"]);
+          });
           break;
 
         case "updateAccountDetails":
@@ -359,7 +363,7 @@
       });
     }
 
-    function onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, tok) {
+    function onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, token) {
       return new Promise((resolve, reject) => {
         let urlValue = parameters["methodUrl"];
         let httpPath = parameters["authToken"];
