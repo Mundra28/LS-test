@@ -370,24 +370,29 @@
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status + urlValue + httpPath);
             let obj = JSON.parse(xhr.responseText);
             postResult({
-              "type": obj.records[0].totalSize,
+              "type": obj.totalSize,
               "Name": obj.records[0].Name,
-              "Primary_Mobile__c": obj.records.Primary_Mobile__c,
-              "Email__c": obj.records.Email__c,
-              "BillingStreet": obj.records[0],
-              "BillingCity": obj.records.BillingCity,
-              "BillingState": obj.records.BillingState,
-              "BillingPostalCode": obj.records.BillingPostalCode,
-              "BillingCountry": obj.records.BillingCountry,
-              "CMC_City_Mapping__c": obj.records.CMC_City_Mapping__c,
-              "Eligible_in_TCS__c": obj.records.Eligible_in_TCS__c,
-              "X6_Digit_FCG_Id__c": obj.records.X6_Digit_FCG_Id__c,
-              "Total_Payment_Received_for_Onboarding__c": obj.records.Total_Payment_Received_for_Onboarding__c,
-              "RC_Transfer_Count_Post_90_Days_Delivery__c": obj.records.RC_Transfer_Count_Post_90_Days_Delivery__c,
-              "Forfeiture_Applicable__c": obj.records.Forfeiture_Applicable__c,
-              "Dealer_Inventory_More_Than_90_Days__c": obj.records.Dealer_Inventory_More_Than_90_Days__c,
-              "Dealer_Financing_Eligible__c": obj.records.Dealer_Financing_Eligible__c,
-              "Id": obj.records.Id
+              "Primary_Mobile__c": obj.records[0].Primary_Mobile__c,
+              "Email__c": obj.records[0].Email__c,
+              "BillingStreet": obj.records[0].BillingStreet,
+              "BillingCity": obj.records[0].BillingCity,
+              "BillingState": obj.records[0].BillingState,
+              "BillingPostalCode": obj.records[0].BillingPostalCode,
+              "BillingCountry": obj.records[0].BillingCountry,
+              "CMC_City_Mapping__c": obj.records[0].CMC_City_Mapping__c,
+              "Eligible_in_TCS__c": obj.records[0].Eligible_in_TCS__c,
+              "X6_Digit_FCG_Id__c": obj.records[0].X6_Digit_FCG_Id__c,
+              "Total_Payment_Received_for_Onboarding__c": obj.records[0].Total_Payment_Received_for_Onboarding__c,
+              "RC_Transfer_Count_Post_90_Days_Delivery__c": obj.records[0].RC_Transfer_Count_Post_90_Days_Delivery__c,
+              "Forfeiture_Applicable__c": obj.records[0].Forfeiture_Applicable__c,
+              "Dealer_Inventory_More_Than_90_Days__c": obj.records[0].Dealer_Inventory_More_Than_90_Days__c,
+              "Dealer_Financing_Eligible__c": obj.records[0].Dealer_Financing_Eligible__c,
+              "Id": obj.records[0].Id,
+              "Name_on_Cancelled_Cheque__c": obj.records[0].Dealer_Onboarding__r.Name_on_Cancelled_Cheque__c,
+              "Notional_Credit__c": obj.records[0].Dealer_Onboarding__r.Notional_Credit__c,
+              "IFSC_code_on_Cancelled_Cheque__c": obj.records[0].Dealer_Onboarding__r.IFSC_code_on_Cancelled_Cheque__c,
+              "Bank_Account_Number__c": obj.records[0].Dealer_Onboarding__r.Bank_Account_Number__c,
+              "Home_Delivery_Status__c": obj.records[0].Dealer_Onboarding__r.Home_Delivery_Status__c
             });
             resolve();
           } catch (error) {
