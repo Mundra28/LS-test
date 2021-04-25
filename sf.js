@@ -320,7 +320,7 @@
         case "accountDetails":
           onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration).then(async function resolved(value) {
             let token = value['access_token'];
-            await onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, token);
+            await onexecuteSalesforceIntegrationaccountDetails(token, parameters);
           }, function errored(error) {
             throw new Error("Failed to get the token" + error + parameters["grant_type"] + parameters["client_id"]);
           });
@@ -367,19 +367,19 @@
       });
     }
 
-    function onexecuteSalesforceIntegrationaccountDetails(parameters, properties, configuration, token) {
+    function onexecuteSalesforceIntegrationaccountDetails(token, parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
         let urlValue = parameters["methodUrl"];
-        let httpPath = parameters["authToken"];
+        var t = token;
         let xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
           try {
             if (xhr.readyState !== 4) return;
-            if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status + urlValue + httpPath);
+            if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status + urlValue + t);
             let obj = JSON.parse(xhr.responseText);
             postResult({
-              "type": obj.totalSize,
+              "type": t,
               "Name": obj.records[0].Name,
               "Primary_Mobile__c": obj.records[0].Primary_Mobile__c,
               "Email__c": obj.records[0].Email__c,
@@ -411,7 +411,7 @@
 
         xhr.withCredentials = false;
         xhr.open("get", urlValue);
-        xhr.setRequestHeader("Authorization", "Bearer " + token);
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
         xhr.send();
       });
     }
