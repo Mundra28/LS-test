@@ -47,7 +47,7 @@
               },
               "type": {
                 "displayName": "type",
-                "type": "string",
+                "type": "number",
                 "description": "type of call"
               },
               "Name": {
@@ -318,12 +318,8 @@
           break;
 
         case "accountDetails":
-          onexecuteSalesforceIntegrationgenerateToken(parameters, properties, configuration).then(async function resolved(value) {
-            let token = value['access_token'];
-            await onexecuteSalesforceIntegrationaccountDetails(token, parameters);
-          }, function errored(error) {
-            throw new Error("Failed to get the token" + error + parameters["grant_type"] + parameters["client_id"]);
-          });
+          let token = "00D7F000000rkY1!ARQAQB.zNv20Kn8GD7g0frJKkZtZyZBxFXd7wsfkt8jbVkgIBwoTGpo9985qllYsDEqbuc6egMFx7ft_R13MjKYZBpL4jRFg";
+          await onexecuteSalesforceIntegrationaccountDetails(token, parameters);
           break;
 
         case "updateAccountDetails":
@@ -379,7 +375,7 @@
             if (xhr.status !== 200 && xhr.status !== 201) throw new Error("Failed with status " + xhr.status + urlValue + t);
             let obj = JSON.parse(xhr.responseText);
             postResult({
-              "type": t,
+              "type": obj.totalSize,
               "Name": obj.records[0].Name,
               "Primary_Mobile__c": obj.records[0].Primary_Mobile__c,
               "Email__c": obj.records[0].Email__c,
@@ -411,7 +407,7 @@
 
         xhr.withCredentials = false;
         xhr.open("get", urlValue);
-        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+        xhr.setRequestHeader('Authorization', "Bearer " + t);
         xhr.send();
       });
     }
