@@ -373,16 +373,16 @@
     function onexecuteSalesforceIntegrationaccountDetails(token, parameters, properties, configuration) {
       return new Promise((resolve, reject) => {
         let urlValue = parameters["methodUrl"];
-        var t = token;
-        let xhr = new XMLHttpRequest();
+       // var t = token;
+        var xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
           try {
             if (xhr.readyState !== 4) return;
-            if (xhr.status !== 200 && xhr.status !== 201) throw new Error(`Failed with status:  ${xhr.status} token: ${t}`);
-            let obj = JSON.parse(xhr.responseText);
+            if (xhr.status !== 200 && xhr.status !== 201) throw new Error(`Failed with status:  ${xhr.status}`);
+            var obj = JSON.parse(xhr.responseText);
             postResult({
-              "token": t,
+              "token": `${token}`,
               "type": obj.totalSize,
               "Name": obj.records[0].Name,
               "Primary_Mobile__c": obj.records[0].Primary_Mobile__c,
@@ -415,7 +415,7 @@
 
         xhr.withCredentials = false;
         xhr.open("get", urlValue);
-        xhr.setRequestHeader('Authorization', "Bearer " + t);
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
         xhr.send();
       });
     }
